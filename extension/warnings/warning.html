@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Warning | URL Sentinel</title>
+  <link rel="stylesheet" href="warning.css">
+  <script src="warning.js" defer></script>
+</head>
+<body>
+  <main class="warning-card">
+    <div class="shield" aria-hidden="true">!</div>
+
+    <p class="eyebrow">URL SENTINEL SECURITY CHECK</p>
+    <h1>Potential threat detected</h1>
+
+    <p class="description">
+      Our machine-learning model flagged this website as potentially unsafe.
+      Avoid entering passwords, payment details, or other sensitive information.
+    </p>
+
+    <section class="details">
+      <p class="detail-label">Website address</p>
+      <p id="targetUrl" class="target-url">Loading URL...</p>
+
+      <div class="risk-row">
+        <span>Risk score</span>
+        <strong id="riskScore">Unavailable</strong>
+      </div>
+
+      <div class="risk-track">
+        <div id="riskBar" class="risk-bar"></div>
+      </div>
+
+      <p id="classification" class="classification">
+        Checking scan result...
+      </p>
+    </section>
+
+    <p class="disclaimer">
+      Automated detection can make mistakes. This warning is not proof that
+      a website is malicious.
+    </p>
+
+    <button id="backButton" class="primary-button">
+      Go back to safety
+    </button>
+
+    <button id="continueButton" class="secondary-button">
+      Continue anyway
+    </button>
+
+    <p id="statusMessage" class="status" role="status"></p>
+  </main>
+</body>
+</html>

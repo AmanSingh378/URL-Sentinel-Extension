@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1020">
+  <title>URL Sentinel</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">盾</div>
+        <div class="brand-copy">
+          <h1>URL Sentinel</h1>
+          <p class="subtitle">AI-powered URL protection</p>
+        </div>
+      </div>
+      <button id="settingsButton" class="icon-button" type="button"
+        aria-label="Open settings" title="Settings">⚙</button>
+    </header>
+
+    <section class="connection">
+      <span id="connectionDot" class="status-dot"></span>
+      <span id="connectionText">Checking detection service...</span>
+    </section>
+
+    <section class="site-card">
+      <div class="section-label">CURRENT WEBSITE</div>
+      <div class="site-row">
+        <div id="siteIcon" class="site-icon" aria-hidden="true">◎</div>
+        <div class="site-info">
+          <div id="siteHost" class="site-host">Checking current tab...</div>
+          <div id="siteUrl" class="site-url">Waiting for page information</div>
+        </div>
+      </div>
+    </section>
+
+    <button id="scanButton" class="scan-button" type="button">
+      <span aria-hidden="true">⌕</span>
+      <span id="scanButtonText">Scan Current URL</span>
+    </button>
+
+    <div id="message" class="message" role="status" aria-live="polite">
+      Scan a website to see its analysis.
+    </div>
+
+    <section id="resultCard" class="result-card hidden" aria-live="polite">
+      <div class="result-header">
+        <div>
+          <div class="section-label">ANALYSIS RESULT</div>
+          <h2 id="resultTitle">Analysis complete</h2>
+        </div>
+        <span id="resultBadge" class="risk-badge">Unknown</span>
+      </div>
+
+      <div class="score-row">
+        <div>
+          <div class="section-label">RISK SCORE</div>
+          <div class="score-caption">0 = lower risk, 100 = higher risk</div>
+        </div>
+        <div id="riskScore" class="score-value">—</div>
+      </div>
+
+      <div class="score-track">
+        <div id="scoreFill" class="score-fill"></div>
+      </div>
+
+      <div class="result-meta">
+        <span>Model</span>
+        <strong id="modelVersion">Not available</strong>
+      </div>
+
+      <div class="section-label indicators-label">DETECTION INDICATORS</div>
+      <ul id="indicatorList" class="indicator-list"></ul>
+
+      <p id="resultDisclaimer" class="disclaimer">
+        Automated analysis is not a guarantee of website safety.
+      </p>
+    </section>
+
+    <section class="diagnostics-card">
+      <div class="diagnostics-heading">
+        <div>
+          <div class="section-label">WEBSITE TROUBLESHOOTING</div>
+          <h2>Website Diagnostics</h2>
+        </div>
+        <span class="diagnostics-icon" aria-hidden="true">⌁</span>
+      </div>
+
+      <p class="diagnostics-description">
+        Check DNS, SSL/TLS, HTTP response, latency and redirects.
+      </p>
+
+      <label class="input-label" for="diagnosticUrl">Website URL</label>
+      <input
+        id="diagnosticUrl"
+        class="url-input"
+        type="url"
+        placeholder="https://example.com"
+        autocomplete="url"
+        spellcheck="false"
+      >
+
+      <div class="diagnostic-actions">
+        <button id="currentTabButton" class="secondary-button" type="button">
+          Use Current Tab
+        </button>
+        <button id="diagnoseButton" class="diagnose-button" type="button">
+          Diagnose
+        </button>
+      </div>
+
+      <div id="diagnosticMessage" class="diagnostic-message"
+        role="status" aria-live="polite">
+        Enter a URL or use the current tab.
+      </div>
+
+      <section id="diagnosticResult" class="diagnostic-result hidden"
+        aria-live="polite">
+        <div class="diagnostic-status-row">
+          <span class="section-label">DIAGNOSTIC SUMMARY</span>
+          <span id="diagnosticHttpBadge" class="diagnostic-badge">Pending</span>
+        </div>
+
+        <p id="diagnosisText" class="diagnosis-text"></p>
+
+        <div class="diagnostic-metrics">
+          <div class="metric">
+            <span>HTTP status</span>
+            <strong id="httpStatus">—</strong>
+          </div>
+          <div class="metric">
+            <span>Response time</span>
+            <strong id="latencyValue">—</strong>
+          </div>
+          <div class="metric">
+            <span>Redirects</span>
+            <strong id="redirectCount">—</strong>
+          </div>
+        </div>
+
+        <div class="diagnostic-detail">
+          <div class="diagnostic-detail-heading">
+            <span>DNS resolution</span>
+            <strong id="dnsStatus">—</strong>
+          </div>
+          <p id="dnsDetails"></p>
+        </div>
+
+        <div class="diagnostic-detail">
+          <div class="diagnostic-detail-heading">
+            <span>SSL / TLS certificate</span>
+            <strong id="tlsStatus">—</strong>
+          </div>
+          <p id="tlsDetails"></p>
+        </div>
+
+        <div class="diagnostic-detail">
+          <div class="diagnostic-detail-heading">
+            <span>Connection details</span>
+          </div>
+          <p id="httpDetails"></p>
+        </div>
+
+        <div class="diagnostic-detail">
+          <div class="diagnostic-detail-heading">
+            <span>Redirect chain</span>
+          </div>
+          <ol id="redirectList" class="redirect-list"></ol>
+        </div>
+
+        <div class="diagnostic-detail">
+          <div class="diagnostic-detail-heading">
+            <span>Possible cause and fix</span>
+          </div>
+          <p id="fixDetails"></p>
+        </div>
+
+        <p class="disclaimer">
+          A successful connection does not mean a website is safe.
+          Diagnostics may not identify the exact cause of every failure.
+        </p>
+      </section>
+    </section>
+
+    <section class="protection-card">
+      <div class="protection-icon" aria-hidden="true">⛨</div>
+      <div class="protection-copy">
+        <strong>Automatic protection</strong>
+        <p id="protectionText">Configure navigation checks in settings.</p>
+      </div>
+      <button id="protectionSettings" class="text-button" type="button">
+        Settings
+      </button>
+    </section>
+
+    <footer class="footer">
+      <span>URL Sentinel · ML-assisted security</span>
+      <span id="versionLabel">v0.1.0</span>
+    </footer>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>

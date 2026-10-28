@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Sentinel Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main class="settings">
+    <header class="header">
+      <div class="logo">S</div>
+      <div>
+        <p class="eyebrow">URL SENTINEL</p>
+        <h1>Extension settings</h1>
+        <p class="intro">Manage protection preferences and privacy.</p>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Protection</h2>
+      <div class="setting-row">
+        <div>
+          <strong>Automatic protection</strong>
+          <p>Enable navigation checks after the automatic protection flow has been configured.</p>
+        </div>
+        <label class="switch">
+          <input id="automaticProtection" type="checkbox">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <p id="protectionNote" class="note" role="status">
+        Automatic navigation checking is not active in this initial build.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Privacy</h2>
+      <div class="setting-row">
+        <div>
+          <strong>Local scan history</strong>
+          <p>Keep recent scan metadata in this browser. Full URLs may contain sensitive information.</p>
+        </div>
+        <label class="switch">
+          <input id="saveHistory" type="checkbox">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <button id="clearHistory" class="secondary-button" type="button">
+        Clear local history
+      </button>
+    </section>
+
+    <section class="card">
+      <h2>Detection service</h2>
+      <p class="body-copy">
+        Development API: <code>http://127.0.0.1:8000</code>
+      </p>
+      <p class="note">
+        This address is for local development only. Production must use a deployed HTTPS API.
+      </p>
+      <div id="saveMessage" class="save-message" role="status"></div>
+    </section>
+
+    <footer>URL Sentinel · Version 0.1.0</footer>
+  </main>
+
+  <script src="options.js"></script>
+</body>
+</html>

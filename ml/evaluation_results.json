@@ -1,0 +1,55 @@
+{
+  "dataset": "data/urls.csv",
+  "dataset_rows_after_cleaning": 235362,
+  "class_counts": {
+    "legitimate": 134850,
+    "phishing": 100512
+  },
+  "test_rows": 47073,
+  "accuracy": 0.8015,
+  "precision_phishing": 0.8416,
+  "recall_phishing": 0.6595,
+  "f1_phishing": 0.7395,
+  "confusion_matrix_labels": [
+    "legitimate",
+    "phishing"
+  ],
+  "confusion_matrix": [
+    [
+      24474,
+      2496
+    ],
+    [
+      6846,
+      13257
+    ]
+  ],
+  "classification_report": {
+    "legitimate": {
+      "precision": 0.7814176245210728,
+      "recall": 0.9074527252502781,
+      "f1-score": 0.8397323726196603,
+      "support": 26970.0
+    },
+    "phishing": {
+      "precision": 0.8415539897162445,
+      "recall": 0.6594538128637517,
+      "f1-score": 0.7394578313253012,
+      "support": 20103.0
+    },
+    "accuracy": 0.8015422853865273,
+    "macro avg": {
+      "precision": 0.8114858071186586,
+      "recall": 0.7834532690570148,
+      "f1-score": 0.7895951019724807,
+      "support": 47073.0
+    },
+    "weighted avg": {
+      "precision": 0.8070994665434326,
+      "recall": 0.8015422853865273,
+      "f1-score": 0.796909117173003,
+      "support": 47073.0
+    }
+  },
+  "evaluation_note": "Metrics are from a random held-out split, not a guarantee of real-world performance. Duplicate URLs were removed, but domain/time leakage may still exist."
+}

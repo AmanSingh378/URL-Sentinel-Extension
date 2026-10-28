@@ -1,0 +1,30 @@
+
+{
+  "manifest_version": 3,
+  "name": "URL Sentinel - Fake URL Detector",
+  "version": "0.1.0",
+  "description": "Analyze URLs for potential phishing and malicious activity using machine learning.",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webNavigation",
+    "notifications"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8000/*",
+    "http://localhost:8000/*"
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "action": {
+    "default_title": "URL Sentinel",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "options_page": "options/options.html"
+}
